@@ -13,7 +13,7 @@ current_time = datetime.now().strftime("%d %B %Y %H:%M:%S WIB")
 # Mendapatkan spesifikasi server secara dinamis
 ram = math.ceil(psutil.virtual_memory().total / (1024 ** 3))  # Total RAM dalam GB
 disk = math.ceil(psutil.disk_usage('/').total / (1024 ** 3))  # Total Disk dalam GB
-cpu = psutil.cpu_percent(interval=1)  # CPU Usage
+cpu_cores = psutil.cpu_count(logical=True)  # Jumlah core CPU logis
 
 # Fungsi untuk menampilkan informasi dengan UI yang lebih serasi
 def display_info():
@@ -32,7 +32,7 @@ def display_info():
     info_text += f"{Fore.LIGHTCYAN_EX}📊 Spesifikasi Server:\n"
     info_text += f"{Fore.LIGHTGREEN_EX}RAM: {ram} GB\n"
     info_text += f"{Fore.LIGHTGREEN_EX}Disk: {disk} GB\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}CPU: {cpu}%\n\n"
+    info_text += f"{Fore.LIGHTGREEN_EX}CPU Cores: {cpu_cores} Cores\n\n"
 
     # Petunjuk penggunaan server dengan branding ZeroCloud
     info_text += f"{Fore.LIGHTCYAN_EX}🔍 Petunjuk Penggunaan (ZeroCloud Guide):\n"
@@ -56,7 +56,7 @@ def display_info():
     info_text += f"{Fore.LIGHTCYAN_EX}Cek Kesehatan Sistem (ZeroCloud Health Check)...\n"
     info_text += f"{Fore.LIGHTGREEN_EX}Memory Available: {math.ceil(psutil.virtual_memory().available / (1024 ** 3))} GB\n"
     info_text += f"{Fore.LIGHTGREEN_EX}Disk Available: {math.ceil(psutil.disk_usage('/').free / (1024 ** 3))} GB\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}CPU Load: {psutil.cpu_percent(interval=1)}%\n"
+    info_text += f"{Fore.LIGHTGREEN_EX}CPU Cores: {cpu_cores} Cores\n"
     info_text += f"{Fore.LIGHTGREEN_EX}Sistem Anda sehat! 😊\n\n"
 
     # Branding ZeroCloud di akhir
