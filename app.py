@@ -1,8 +1,6 @@
-import psutil
 import os
 from datetime import datetime
 from colorama import Fore, Style, init
-import math
 
 # Inisialisasi colorama
 init(autoreset=True)
@@ -10,73 +8,58 @@ init(autoreset=True)
 # Mendapatkan waktu saat ini
 current_time = datetime.now().strftime("%d %B %Y %H:%M:%S WIB")
 
-# Mendapatkan spesifikasi server secara dinamis
-ram = math.ceil(psutil.virtual_memory().total / (1024 ** 3))  # Total RAM dalam GB
-disk = math.ceil(psutil.disk_usage('/').total / (1024 ** 3))  # Total Disk dalam GB
-cpu_cores = psutil.cpu_count(logical=True)  # Jumlah core CPU logis
+def display_console_guide():
+    info = ""
 
-# Fungsi untuk menampilkan informasi dengan UI yang lebih serasi
-def display_info():
-    info_text = ""
+    # Header branding
+    info += f"{Fore.CYAN}🖥️ ZeroCloud - Panduan Console untuk Pemula\n"
+    info += f"{Fore.LIGHTCYAN_EX}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+    info += f"{Fore.LIGHTCYAN_EX}📌 Kamu lagi di Console? Mantap! Yuk belajar langkah pentingnya 👇\n\n"
 
-    # Branding ZeroCloud di awal
-    info_text += f"{Fore.CYAN}💫 ZeroCloud Indonesia - INFORMASI SERVER 💫\n"
-    info_text += f"{Fore.LIGHTCYAN_EX}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-    info_text += f"{Fore.LIGHTCYAN_EX}🚀 Powered by ZeroCloud Indonesia 🚀\n\n"
+    # Waktu
+    info += f"{Fore.LIGHTCYAN_EX}🕒 Sekarang: {current_time}\n\n"
 
-    # Informasi waktu pembuatan server
-    info_text += f"{Fore.LIGHTCYAN_EX}🕒 Waktu Pembuatan Server:\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}{current_time}\n\n"
+    # Langkah penting
+    info += f"{Fore.LIGHTCYAN_EX}🚦 Perbedaan Tombol Penting:\n"
+    info += f"{Fore.LIGHTGREEN_EX}- ▶️ Start: Menyalakan server (kalau mati)\n"
+    info += f"{Fore.LIGHTGREEN_EX}- ⏹️ Stop: Mematikan server secara halus\n"
+    info += f"{Fore.LIGHTGREEN_EX}- 🔁 Restart: Memuat ulang server (biasanya setelah ubah pengaturan)\n\n"
 
-    # Informasi spesifikasi server
-    info_text += f"{Fore.LIGHTCYAN_EX}📊 Spesifikasi Server:\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}RAM: {ram} GB\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}Disk: {disk} GB\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}CPU Cores: {cpu_cores} Cores\n\n"
+    info += f"{Fore.LIGHTCYAN_EX}🥚 Ganti Egg (Software Server):\n"
+    info += f"{Fore.LIGHTGREEN_EX}1. Klik tab 'Settings'\n"
+    info += f"{Fore.LIGHTGREEN_EX}2. Cari bagian 'Egg Changer', pilih Game/Software apa yang ingin digunakan dan klik 'Change Egg' (Software Installer)\n"
+    info += f"{Fore.LIGHTGREEN_EX}3. Pilih jenis server sesuai kebutuhan: contoh Minecraft Paper, Forge, dll\n"
+    info += f"{Fore.LIGHTGREEN_EX}4. Setelah pilih, klik 'Reinstall' biar file-nya disiapkan otomatis\n"
+    info += f"{Fore.LIGHTGREEN_EX}⚠️ *Reinstall akan hapus semua file, jadi backup dulu ya!*\n\n"
 
-    # Petunjuk penggunaan server dengan branding ZeroCloud
-    info_text += f"{Fore.LIGHTCYAN_EX}🔍 Petunjuk Penggunaan (ZeroCloud Guide):\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}1. Kunjungi tab 'Software' di panel ZeroCloud\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}2. Pilih software yang ingin Anda gunakan\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}3. Install software yang dipilih\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}4. Ikuti petunjuk instalasi yang tersedia di panel ZeroCloud\n\n"
+    info += f"{Fore.LIGHTCYAN_EX}🎮 Ganti Versi Game / Modpack:\n"
+    info += f"{Fore.LIGHTGREEN_EX}- Setelah pilih egg, biasanya kamu bisa pilih versi di tab 'Startup'\n"
+    info += f"{Fore.LIGHTGREEN_EX}- Contoh: ganti Minecraft dari 1.20.1 ke 1.19.2 tinggal ubah versi lalu Reinstall\n\n"
 
-    # Peringatan penting
-    info_text += f"{Fore.LIGHTCYAN_EX}❗ PENTING (ZeroCloud Tips):\n"
-    info_text += f"{Fore.LIGHTRED_EX}- Pastikan memilih software yang sesuai dengan kebutuhan Anda di ZeroCloud\n"
-    info_text += f"{Fore.LIGHTRED_EX}- Bacalah dokumentasi software yang dipilih di panel ZeroCloud\n"
-    info_text += f"{Fore.LIGHTRED_EX}- Jika butuh bantuan, hubungi tim support ZeroCloud Indonesia\n\n"
+    info += f"{Fore.LIGHTCYAN_EX}💾 Backup Sebelum Reinstall:\n"
+    info += f"{Fore.LIGHTGREEN_EX}1. Buka tab 'Backups'\n"
+    info += f"{Fore.LIGHTGREEN_EX}2. Klik 'Create Backup' ➜ tunggu proses selesai\n"
+    info += f"{Fore.LIGHTGREEN_EX}3. Kamu bisa restore kapan aja kalau butuh\n\n"
 
-    # Branding ZeroCloud di akhir
-    info_text += f"{Fore.CYAN}✨ Selamat menggunakan server Anda! Ditenagai oleh ZeroCloud Indonesia ✨\n"
-    info_text += f"{Fore.LIGHTCYAN_EX}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+    info += f"{Fore.LIGHTCYAN_EX}⚙️ Tips Tambahan Buat Pemula:\n"
+    info += f"{Fore.LIGHTGREEN_EX}- Jangan spam tombol Start/Restart, biarkan server loading dulu\n"
+    info += f"{Fore.LIGHTGREEN_EX}- Cek tab 'Console' buat lihat error/log aktivitas server\n"
+    info += f"{Fore.LIGHTGREEN_EX}- Kalau gagal booting, mungkin salah egg/versi, bisa ganti dari 'Startup'\n"
+    info += f"{Fore.LIGHTGREEN_EX}- Upload map/modpack bisa lewat tab 'File' atau pake FTP (contohnya di Discord guide)\n\n"
 
-    # Diagnostic System
-    info_text += f"{Fore.LIGHTBLUE_EX}🔧 DIAGNOSTIC SERVER (ZeroCloud Diagnostic) 🔧\n"
-    info_text += f"{Fore.LIGHTCYAN_EX}Cek Kesehatan Sistem (ZeroCloud Health Check)...\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}Memory Available: {math.ceil(psutil.virtual_memory().available / (1024 ** 3))} GB\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}Disk Available: {math.ceil(psutil.disk_usage('/').free / (1024 ** 3))} GB\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}CPU Cores: {cpu_cores} Cores\n"
-    info_text += f"{Fore.LIGHTGREEN_EX}Sistem Anda sehat! 😊\n\n"
+    # Ending
+    info += f"{Fore.CYAN}🎉 Enjoy main dan eksplorasi bareng ZeroCloud! 🎉\n"
+    info += f"{Fore.LIGHTCYAN_EX}Butuh bantuan? Join Discord kami & buka tiket: https://discord.gg/zerocloud\n"
+    info += f"{Fore.LIGHTCYAN_EX}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
 
-    # Branding ZeroCloud di akhir
-    info_text += f"{Fore.LIGHTCYAN_EX}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-    info_text += f"{Fore.LIGHTCYAN_EX}ZeroCloud Indonesia - Your Server, Your Way! 🚀🌐\n"
-    info_text += f"{Fore.LIGHTCYAN_EX}Nikmati pengalaman terbaik dengan ZeroCloud Indonesia.\n"
+    # Simpan ke file
+    with open("console-guide.txt", "w") as f:
+        f.write(info.replace(Fore.CYAN, "").replace(Fore.LIGHTCYAN_EX, "").replace(Fore.LIGHTGREEN_EX, ""))
 
-    # Menulis ke dalam info.txt
-    with open("info.txt", "w") as file:
-        file.write(info_text.replace(Fore.LIGHTCYAN_EX, "").replace(Fore.LIGHTGREEN_EX, "").replace(Fore.LIGHTRED_EX, "").replace(Fore.CYAN, "").replace(Fore.LIGHTBLUE_EX, ""))
-
-    # Menampilkan ke terminal
-    print(info_text)
-
-    # Memberikan informasi bahwa file info.txt telah dibuat
-    print(Fore.LIGHTCYAN_EX + "\n🔔 Semua informasi juga telah disimpan di file 'info.txt'.")
-    print(Fore.LIGHTGREEN_EX + "Cek file 'info.txt' di direktori yang sama dengan script untuk melihat detailnya.\n")
-
-    # Menunggu pengguna sebelum keluar
+    # Tampilkan
+    print(info)
+    print(Fore.LIGHTCYAN_EX + "\n📄 Panduan ini juga disimpan di 'console-guide.txt'.")
     input(Fore.CYAN + "Tekan Enter untuk keluar...")
 
 if __name__ == "__main__":
-    display_info()
+    display_console_guide()
